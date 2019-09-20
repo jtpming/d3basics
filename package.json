@@ -1,0 +1,19 @@
+{
+  "name": "load-data",
+  "description": "Loading data with D3",
+  "license": "ISC",
+  "dependencies": {
+    "d3": "^5.12.0",
+    "d3-fetch": "^1.1.2"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": ""
+}

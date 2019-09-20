@@ -1,0 +1,15 @@
+svg {
+    border: 1px solid #ccc;
+}
+
+text {
+    font-family: 'Avenir', sans-serif;
+}
+
+.axis .domain {
+    stroke: none;
+}
+
+.x line {
+    stroke: white;
+}
