@@ -1,3 +1,4 @@
+/*Bar Chart
 svg {
     border: 1px solid #ccc;
 }
@@ -12,4 +13,24 @@ text {
 
 .x line {
     stroke: white;
+}
+
+*/
+
+svg {
+    border: 1px solid #ccc;
+}
+
+text {
+    font-family: 'Avenir', sans-serif;
+}
+
+.axis .domain {
+    stroke: #bbb;
+}
+
+.axis tick {
+    stroke: #bbb;
+    stroke-width: 0.5;
+    stroke-dasharray: 4, 2;
 }

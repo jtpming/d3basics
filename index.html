@@ -18,17 +18,19 @@
             }
 
             .axis .domain {
-                stroke: none;
+                stroke: #bbb;
             }
 
-            .x line {
-                stroke: white;
+            .axis .tick line{
+                stroke: #bbb;
+                stroke-width: 0.5;
+                stroke-dasharray: 4, 2;
             }
         </style>
         <link rel= "stylesheet" href= "style.css" />
     </head>
     <body>
-        <div class="bar-chart-container"></div>
-        <script src="app.js"></script>
+        <div class="scatter-plot-container"></div>
+        <script src="scatter.js"></script>
     </body>
 </html>
