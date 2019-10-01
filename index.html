@@ -8,29 +8,18 @@
         <script src="node_modules/d3-dsv/dist/d3-dsv.min.js"></script>
         <script src="node_modules/d3-fetch/dist/d3-fetch.min.js"></script>
         <script src="https://d3js.org/d3-array.v2.min.js"></script>
-        <style>
-            svg {
-                border: 1px solid #ccc;
-            }
-
-            text {
-                font-family: 'Avenir', sans-serif;
-            }
-
-            .axis .domain {
-                stroke: #bbb;
-            }
-
-            .axis .tick line{
-                stroke: #bbb;
-                stroke-width: 0.5;
-                stroke-dasharray: 4, 2;
-            }
-        </style>
         <link rel= "stylesheet" href= "style.css" />
     </head>
     <body>
+        <!--Scatterplot-->
         <div class="scatter-plot-container"></div>
+
+        <!--Selected elements-->
+        <div class="selected-container">
+            <div class="selected-header">Seleted Loans</div>
+            <div class="selected-body"></div>
+        </div>
+
         <script src="scatter.js"></script>
     </body>
 </html>

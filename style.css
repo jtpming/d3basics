@@ -1,24 +1,5 @@
-/*Bar Chart
 svg {
-    border: 1px solid #ccc;
-}
-
-text {
-    font-family: 'Avenir', sans-serif;
-}
-
-.axis .domain {
-    stroke: none;
-}
-
-.x line {
-    stroke: white;
-}
-
-*/
-
-svg {
-    border: 1px solid #ccc;
+    border: 5px solid #ccc;
 }
 
 text {
@@ -29,8 +10,53 @@ text {
     stroke: #bbb;
 }
 
-.axis tick {
+.axis .tick line{
     stroke: #bbb;
     stroke-width: 0.5;
     stroke-dasharray: 4, 2;
+}
+
+.axes-labels text{
+    font-size: 0.6em;
+    fill: #444
+}
+
+body {
+    display: flex;
+}
+
+.selected-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+    border: 5px solid #ccc;
+
+
+}
+
+.selected-header {
+    background: #f0f0f0;
+    color: #777;
+    padding: 0.5rem 2rem;
+    text-align: right
+}
+
+.selected-body{
+    overflow: auto;
+    font-size: 0.8em;
+    cursor: default;
+}
+
+.selected-title{
+    font-weight: bold
+}
+
+.selected-element {
+    margin: 0.5em;
+    padding: 0.5em;
+    transition: background-color 200ms ease;
+}
+
+.selected-element:hover{
+    background-color: #f0f0f0
 }

@@ -1,3 +1,5 @@
+//import { func } from "prop-types";
+
 //Data Prep
 function filterData(data){
     return data.filter(d => {
@@ -20,7 +22,7 @@ function prepareBarChartData(data){
 }
 
 function prepareScatterData(data){
-    return data.sort((a,b) => b.OriginalFICO - a.OriginalFICO).filter((d,i) => i < 200000);
+    return data.sort((a,b) => b.OriginalFICO - a.OriginalFICO).filter((d,i) => i < 10000);
 }
 
 
@@ -153,6 +155,95 @@ function ready(loans){
         ///.attr('transform', `translate(0, ${height})`)
         .call(yAxis)
         .call(addLabel, 'C BAL', -40, -25)
+
+    //Event handlers for selected elements
+    let selectedID;
+
+    function mouseover(){
+        selectedID = d3.select(this).data()[0].LoanID;
+        d3.selectAll('.scatter')
+            .filter(d => d.LoanID === selectedID)
+            .transition()
+            .attr('r', 10)
+    }
+
+    function mouseout(){
+        selectedID = d3.select(this).data()[0].LoanID;
+        d3.selectAll('.scatter')
+            .filter(d => d.LoanID === selectedID)
+            .transition()
+            .attr('r', 0.8);
+    }
+
+    //Update selected elements
+    function updateSelected(data){
+        d3.select('.selected-body')
+            .selectAll('.selected-element')
+            .data(data, d => d.id)
+            .join(
+                enter => enter
+                    .append('p')
+                    .attr('class', 'selected-element')
+                    .html(
+                        d => `<span class="selected-title">${d.LoanID}</span>, ${formatTicks(d.CurrentBalance)}
+                        <br>OFico: ${d.OriginalFICO} | CombinedLTV: ${d.CombinedLTV}` 
+                    ),
+
+                update => update,
+
+                exit => exit.remove(),
+            )
+            .on('mouseover', mouseover)
+            .on('mouseout', mouseout);
+    }
+
+    function highlightSelected(data){
+        const selectedIDs = data.map(d => d.LoanID);
+        
+        d3.selectAll('.scatter')
+            .filter(d => selectedIDs.includes(d.LoanID))
+            .style('fill', 'coral');
+
+        d3.selectAll('.scatter')
+            .filter(d => !selectedIDs.includes(d.LoanID))
+            .style('fill', 'dodgerblue');
+    }
+
+    //Brush handler
+    function brushed(){
+        if (d3.event.selection){
+            const [[x0, y0], [x1,y1]] = d3.event.selection
+            const selected = scatterData.filter(
+                d =>
+                x0 <= xScale(d.OriginalFICO) && 
+                xScale(d.OriginalFICO) < x1 &&
+                y0 <= yScale(d.CurrentBalance) 
+                && yScale(d.CurrentBalance) < y1
+            )
+            updateSelected(selected)
+            highlightSelected(selected)
+        } else {
+            updateSelected([])
+            highlightSelected([])
+        }
+    }
+
+    //Prep seleted elements' container
+    d3.select('.selected-container')
+        .style('width', `${width + margin.left + margin.right}px`)
+        .style('height', `${height + margin.top + margin.bottom}px`)
+
+
+    //Add Brush
+    const brush = d3.brush()
+        .extent([[0, 0], [width, height]])
+        .on('brush end', brushed)
+
+
+    svg
+        .append('g')
+        .attr('class', 'brush')
+        .call(brush);
     }
 
   
